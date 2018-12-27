@@ -12,6 +12,11 @@ import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-ed
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {DialogModule} from 'primeng/dialog';
 import {DropdownDirective} from './shared/dropdown.directive';
+import {ShoppingListService} from './shopping-list/shopping-list.service';
+import {MessagesModule} from 'primeng/messages';
+import {MessageModule} from 'primeng/message';
+import {MessageService} from 'primeng/api';
+import {ToastModule} from 'primeng/toast';
 
 @NgModule({
   declarations: [
@@ -28,9 +33,12 @@ import {DropdownDirective} from './shared/dropdown.directive';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    DialogModule
+    DialogModule,
+    MessagesModule,
+    MessageModule,
+    ToastModule
   ],
-  providers: [],
+  providers: [ShoppingListService, MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
