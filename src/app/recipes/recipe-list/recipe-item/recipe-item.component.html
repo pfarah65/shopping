@@ -2,8 +2,32 @@
   <div class="pull-left">
     <h4 class="list-group-item-heading">{{recipe.name}}</h4>
     <p class="list-group-item-text">{{recipe.description}}</p>
+   <!--<button class="btn btn-default" (click)="showDialog()">View</button>-->
   </div>
   <span class="pull-right">
         <img [src]="recipe.imagePath" alt="{{ recipe.name}}" class="img-responsive" style="max-height: 50px;">
       </span>
+
 </a>
+<p-dialog header={{recipe.name}} [(visible)]="display" [modal]="true" [responsive]="true" [style]="{width: '350px'}" [minY]="70"
+          [maximizable]="true" [baseZIndex]="10000">
+  <!--<div class="row">-->
+    <p-header>
+
+    </p-header>
+    <div class="col-xs-12">
+      <h3 style="position: "></h3>
+    </div>
+    <div class="col-xs-12">
+      <p>{{recipe.description}}</p>
+      <ul class="list-group">
+        <li class="list-group-item" *ngFor="let ing of recipe.ingredients">
+          {{ing.name}}
+        </li>
+      </ul>
+    </div>
+    <!--</div>-->
+  <p-footer>
+    <button class="btn btn-default" (click)="closeDialog()">Close</button>
+  </p-footer>
+</p-dialog>

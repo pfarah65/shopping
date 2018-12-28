@@ -23,6 +23,6 @@ export class ShoppingEditComponent implements OnInit {
     this.addItemMsg();
   }
   addItemMsg() {
-    this.messageService.add({severity:'success', summary: 'Success', detail:'Added to Shopping List'});
+    this.messageService.add({severity:'success', summary: 'Success', detail:'Added '+this.nameInputRef.nativeElement.value+' to Shopping List!'});
   }
 }
