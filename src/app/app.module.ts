@@ -17,6 +17,9 @@ import {MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
 import {MessageService} from 'primeng/api';
 import {ToastModule} from 'primeng/toast';
+import {AppRoutingModule} from './app.routing.module';
+import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.component';
+import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +31,9 @@ import {ToastModule} from 'primeng/toast';
     RecipeItemComponent,
     ShoppingListComponent,
     ShoppingEditComponent,
-    DropdownDirective
+    DropdownDirective,
+    RecipeStartComponent,
+    RecipeEditComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +41,8 @@ import {ToastModule} from 'primeng/toast';
     DialogModule,
     MessagesModule,
     MessageModule,
-    ToastModule
+    ToastModule,
+    AppRoutingModule
   ],
   providers: [ShoppingListService, MessageService],
   bootstrap: [AppComponent]
