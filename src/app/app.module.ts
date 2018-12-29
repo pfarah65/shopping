@@ -15,12 +15,13 @@ import {DropdownDirective} from './shared/dropdown.directive';
 import {ShoppingListService} from './shopping-list/shopping-list.service';
 import {MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
-import {MessageService} from 'primeng/api';
+import {ConfirmationService, MessageService} from 'primeng/api';
 import {ToastModule} from 'primeng/toast';
 import {AppRoutingModule} from './app.routing.module';
 import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.component';
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 import {FormsModule} from '@angular/forms';
+import {ConfirmDialogModule} from 'primeng/primeng';
 
 @NgModule({
   declarations: [
@@ -44,9 +45,10 @@ import {FormsModule} from '@angular/forms';
     MessageModule,
     ToastModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    ConfirmDialogModule
   ],
-  providers: [ShoppingListService, MessageService],
+  providers: [ShoppingListService, MessageService, ConfirmationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

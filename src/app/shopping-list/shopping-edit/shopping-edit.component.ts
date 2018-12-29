@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Ingredient} from '../../shared/ingredient.model';
 import {ShoppingListService} from '../shopping-list.service';
-import {MessageService} from 'primeng/api';
+import {ConfirmationService, MessageService} from 'primeng/api';
 import {NgForm} from '@angular/forms';
 import {Subscription} from 'rxjs';
 
@@ -13,7 +13,9 @@ import {Subscription} from 'rxjs';
 export class ShoppingEditComponent implements OnInit, OnDestroy {
   @ViewChild('f') slForm:NgForm;
 
-  constructor(private shoppingListService: ShoppingListService, private messageService:MessageService) { }
+  constructor(private shoppingListService: ShoppingListService,
+              private messageService:MessageService,
+              private  confirmService: ConfirmationService) { }
   editSubject: Subscription;
   editMode = false;
   editIndex: number;
@@ -53,7 +55,21 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
       this.messageService.add({severity:'success', summary: 'Success', detail: 'Added ' + item + ' to Shopping List!'});
     }
   }
+  onClear(){
+    this.confirmService.confirm({
+      message: 'Are you sure that you want to clear?',
+      header: 'Confirmation',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.shoppingListService.reset();
+        this.messageService.add({severity:'info', summary:'Confirmed', detail:'You have cleared Shopping List'});
+        },
+      reject: () => {
+        this.messageService.add({severity:'info', summary:'Rejected', detail:'You have rejected'});
+      }
 
+    });
+  }
   ngOnDestroy(){
     this.editSubject.unsubscribe();
   }
