@@ -3,7 +3,7 @@ import {Recipe} from '../recipe.model';
 import {RecipeService} from '../recipe.service';
 import {Message} from 'primeng//api';
 import {MessageService} from 'primeng/api';
-import {ActivatedRoute, Params} from '@angular/router';
+import {ActivatedRoute, Params, Router} from '@angular/router';
 
 @Component({
   selector: 'app-recipe-detail',
@@ -14,7 +14,7 @@ export class RecipeDetailComponent implements OnInit {
   recipe:Recipe;
   id: number;
   constructor(private recipeService: RecipeService,private messageService: MessageService,
-              private activatedRoute: ActivatedRoute) { }
+              private activatedRoute: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
     this.activatedRoute.params.subscribe((params: Params) => {
@@ -31,5 +31,9 @@ export class RecipeDetailComponent implements OnInit {
   }
   addItemsToList() {
     this.messageService.add({severity:'success', summary: 'Success', detail:'Added to Shopping List'});
+  }
+
+  onEditRecipe(){
+    this.router.navigate(['edit'],{relativeTo:this.activatedRoute});
   }
 }

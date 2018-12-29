@@ -1,5 +1,5 @@
 .container-fluid{
-  background-color: #9644d2;
+  background-color: #1b4bb3;
 }
 .navbar-default .navbar-nav>li>a{
   color: white;
@@ -12,10 +12,11 @@ a{
   color: white;
 }
 .navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover{
-  background-color: #4b0082;
+  background-color: #112e6f;
 }
 
 .navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover{
-  background-color: #7935ab;
+  background-color: #112e6f;
 
 }
+
