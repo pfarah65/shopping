@@ -55,9 +55,9 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
       this.messageService.add({severity:'success', summary: 'Success', detail: 'Added ' + item + ' to Shopping List!'});
     }
   }
-  onClear(){
+  onClear(form: NgForm){
     this.confirmService.confirm({
-      message: 'Are you sure that you want to clear?',
+      message: 'Are you sure that you want to clear the Shopping List?',
       header: 'Confirmation',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
@@ -65,10 +65,32 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
         this.messageService.add({severity:'info', summary:'Confirmed', detail:'You have cleared Shopping List'});
         },
       reject: () => {
-        this.messageService.add({severity:'info', summary:'Rejected', detail:'You have rejected'});
+        this.messageService.add({severity:'info', summary:'Rejected', detail:'You have canceled'});
       }
 
     });
+    form.reset();
+
+  }
+  onDelete(form: NgForm){
+    this.confirmService.confirm({
+      message: `Are you sure that you want to remove ${this.editItem.name} from the Shopping List?`,
+      header: 'Confirmation',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.shoppingListService.delete(this.editIndex);
+        this.messageService.add({severity:'info', summary:'Confirmed', detail:`You have removed ${this.editItem.name} from the Shopping List`});
+        this.editMode = false;
+        form.reset();
+      },
+      reject: () => {
+        this.messageService.add({severity:'info', summary:'Rejected', detail: 'You have canceled'});
+      }
+
+    });
+  }
+  unselect(){
+    this.editMode = false;
   }
   ngOnDestroy(){
     this.editSubject.unsubscribe();

@@ -17,6 +17,8 @@ a{
 
 .navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover{
   background-color: #112e6f;
-
 }
 
+.navbar-default{
+  border-color:#1b4bb3 ;
+}
