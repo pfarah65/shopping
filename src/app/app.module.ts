@@ -23,6 +23,8 @@ import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ConfirmDialogModule} from 'primeng/primeng';
 import {RecipeService} from './recipes/recipe.service';
+import {HttpClientModule} from '@angular/common/http';
+import {DataStorageService} from './shared/data-storage.service';
 
 @NgModule({
   declarations: [
@@ -48,9 +50,10 @@ import {RecipeService} from './recipes/recipe.service';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    HttpClientModule
   ],
-  providers: [ShoppingListService, RecipeService, MessageService, ConfirmationService],
+  providers: [ShoppingListService, RecipeService, MessageService, ConfirmationService, DataStorageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
