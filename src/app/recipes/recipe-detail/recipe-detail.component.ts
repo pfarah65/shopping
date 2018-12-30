@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Recipe} from '../recipe.model';
 import {RecipeService} from '../recipe.service';
-import {Message} from 'primeng//api';
+import {ConfirmationService, Message} from 'primeng//api';
 import {MessageService} from 'primeng/api';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 
@@ -14,7 +14,8 @@ export class RecipeDetailComponent implements OnInit {
   recipe:Recipe;
   id: number;
   constructor(private recipeService: RecipeService,private messageService: MessageService,
-              private activatedRoute: ActivatedRoute, private router: Router) { }
+              private activatedRoute: ActivatedRoute, private router: Router,
+              private confirmService: ConfirmationService) { }
 
   ngOnInit() {
     this.activatedRoute.params.subscribe((params: Params) => {
@@ -35,5 +36,21 @@ export class RecipeDetailComponent implements OnInit {
 
   onEditRecipe(){
     this.router.navigate(['edit'],{relativeTo:this.activatedRoute});
+  }
+  onDeleteRecipe(){
+    this.confirmService.confirm({
+      message: `Are you sure that you want to remove ${this.recipe.name} from the Recipe List?`,
+      header: 'Confirmation',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.recipeService.deleteRecipe(this.id);
+        this.router.navigate(['../'],{relativeTo: this.activatedRoute});
+        this.messageService.add({severity:'info', summary:'Confirmed', detail:`You have removed ${this.recipe.name} from the Recipe List`});
+      },
+      reject: () => {
+        this.messageService.add({severity:'info', summary:'Canceled', detail: 'You have canceled'});
+      }
+
+    });
   }
 }
