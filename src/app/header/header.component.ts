@@ -4,6 +4,7 @@ import {Recipe} from '../recipes/recipe.model';
 import {RecipeService} from '../recipes/recipe.service';
 import {ShoppingListService} from '../shopping-list/shopping-list.service';
 import {Ingredient} from '../shared/ingredient.model';
+import {AuthService} from '../auth/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -14,7 +15,8 @@ import {Ingredient} from '../shared/ingredient.model';
 export class HeaderComponent implements OnInit{
   constructor(private dataStorageService: DataStorageService,
               private recipeService: RecipeService,
-              private shoppingListService: ShoppingListService) {}
+              private shoppingListService: ShoppingListService,
+              private authService: AuthService) {}
   onSaveData(){
     this.dataStorageService.storeRecipes().subscribe( (respone: Response) => {
 
@@ -22,7 +24,9 @@ export class HeaderComponent implements OnInit{
 
   }
   ngOnInit(){
-    this.update();
+    if(this.authService.isAuthenticated()){
+      this.update();
+    }
   }
   onFetchData(){
     this.dataStorageService.getRecipes().subscribe(
@@ -42,6 +46,10 @@ export class HeaderComponent implements OnInit{
   update(){
     console.log('updating');
     this.onFetchData();
+  }
+
+  onLogout(){
+    this.authService.logout();
   }
 
 

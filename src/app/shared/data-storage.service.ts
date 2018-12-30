@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {RecipeService} from '../recipes/recipe.service';
 import {Recipe} from '../recipes/recipe.model';
 import {ShoppingListService} from '../shopping-list/shopping-list.service';
+import {AuthService} from '../auth/auth.service';
 @Injectable()
 export class DataStorageService {
   recipeURL = 'https://ng-recipe-book-44be3.firebaseio.com/recipes.json';
@@ -11,28 +12,37 @@ export class DataStorageService {
   shoppingListURL = 'https://ng-recipe-book-44be3.firebaseio.com/shoppingList.json';
 
   constructor(private  http: HttpClient, private recipeService: RecipeService,
-              private shoppingListService: ShoppingListService){
+              private shoppingListService: ShoppingListService,
+              private authService: AuthService){
 
   }
 
   storeRecipes(){
+    const token = this.authService.getToken();
+    this.authService.getToken();
     console.log(this.recipeService.getRecipes());
-    return this.http.put(this.recipeURL,
+    return this.http.put(this.recipeURL + '?auth=' + token.toString(),
       this.recipeService.getRecipes());
   }
 
   getRecipes() {
-    return this.http.get(this.recipeURL);
+    const token = this.authService.getToken();
+
+    return this.http.get(this.recipeURL + '?auth=' + token.toString());
   }
 
   
   storeShoppingItems(){
-    return this.http.put(this.shoppingListURL,
+    const token = this.authService.getToken();
+
+    return this.http.put(this.shoppingListURL + '?auth=' + token.toString(),
       this.shoppingListService.getIngredients());
   }
 
   getShoppingItems(){
-    return this.http.get(this.shoppingListURL);
+    const token = this.authService.getToken();
+
+    return this.http.get(this.shoppingListURL + '?auth=' + token.toString());
   }
 
   fixResponse(recipes: Recipe[]) {
