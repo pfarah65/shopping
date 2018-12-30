@@ -1,4 +1,4 @@
-import {Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {DataStorageService} from '../shared/data-storage.service';
 import {Recipe} from '../recipes/recipe.model';
 import {RecipeService} from '../recipes/recipe.service';
@@ -11,7 +11,7 @@ import {Ingredient} from '../shared/ingredient.model';
   styleUrls: ['./header.component.css']
 
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit{
   constructor(private dataStorageService: DataStorageService,
               private recipeService: RecipeService,
               private shoppingListService: ShoppingListService) {}
@@ -19,6 +19,10 @@ export class HeaderComponent {
     this.dataStorageService.storeRecipes().subscribe( (respone: Response) => {
 
     });
+
+  }
+  ngOnInit(){
+    this.update();
   }
   onFetchData(){
     this.dataStorageService.getRecipes().subscribe(
@@ -34,6 +38,10 @@ export class HeaderComponent {
           this.shoppingListService.dataIngredients(response);
         }
     });
+  }
+  update(){
+    console.log('updating');
+    this.onFetchData();
   }
 
 

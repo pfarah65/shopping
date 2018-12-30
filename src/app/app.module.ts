@@ -25,6 +25,8 @@ import {ConfirmDialogModule} from 'primeng/primeng';
 import {RecipeService} from './recipes/recipe.service';
 import {HttpClientModule} from '@angular/common/http';
 import {DataStorageService} from './shared/data-storage.service';
+import { SignupComponent } from './auth/signup/signup.component';
+import { SigninComponent } from './auth/signin/signin.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +41,8 @@ import {DataStorageService} from './shared/data-storage.service';
     DropdownDirective,
     RecipeStartComponent,
     RecipeEditComponent,
+    SignupComponent,
+    SigninComponent,
   ],
   imports: [
     BrowserModule,

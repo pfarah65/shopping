@@ -5,6 +5,7 @@ import {ConfirmationService, Message} from 'primeng//api';
 import {MessageService} from 'primeng/api';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {DataStorageService} from '../../shared/data-storage.service';
+import {ShoppingListService} from '../../shopping-list/shopping-list.service';
 
 @Component({
   selector: 'app-recipe-detail',
@@ -17,20 +18,24 @@ export class RecipeDetailComponent implements OnInit {
   constructor(private recipeService: RecipeService,private messageService: MessageService,
               private activatedRoute: ActivatedRoute, private router: Router,
               private confirmService: ConfirmationService,
-              private dataStorageService: DataStorageService) { }
+              private dataStorageService: DataStorageService,
+              private shoppingListService: ShoppingListService) { }
 
   ngOnInit() {
     this.activatedRoute.params.subscribe((params: Params) => {
       this.id = +params['id'];
       this.recipe = this.recipeService.getRecipe(this.id);
+      console.log(this.recipe);
+
 
     });
-
-    
   }
   OnaddToShoppingList(){
     this.recipeService.addIngredientsToShoppingList(this.recipe.ingredients);
     this.addItemsToList();
+    this.dataStorageService.storeShoppingItems().subscribe( (respone: Response) => {
+    });
+
   }
   addItemsToList() {
     this.messageService.add({severity:'success', summary: 'Success', detail:'Added to Shopping List'});

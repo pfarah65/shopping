@@ -6,6 +6,8 @@ import {ShoppingListService} from '../shopping-list/shopping-list.service';
 @Injectable()
 export class DataStorageService {
   recipeURL = 'https://ng-recipe-book-44be3.firebaseio.com/recipes.json';
+  recipeURLItem = 'https://ng-recipe-book-44be3.firebaseio.com/recipes/'
+  json = '.json'
   shoppingListURL = 'https://ng-recipe-book-44be3.firebaseio.com/shoppingList.json';
 
   constructor(private  http: HttpClient, private recipeService: RecipeService,
@@ -22,6 +24,7 @@ export class DataStorageService {
   getRecipes() {
     return this.http.get(this.recipeURL);
   }
+
   
   storeShoppingItems(){
     return this.http.put(this.shoppingListURL,
