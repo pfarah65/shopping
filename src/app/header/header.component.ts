@@ -2,6 +2,8 @@ import {Component } from '@angular/core';
 import {DataStorageService} from '../shared/data-storage.service';
 import {Recipe} from '../recipes/recipe.model';
 import {RecipeService} from '../recipes/recipe.service';
+import {ShoppingListService} from '../shopping-list/shopping-list.service';
+import {Ingredient} from '../shared/ingredient.model';
 
 @Component({
   selector: 'app-header',
@@ -11,7 +13,8 @@ import {RecipeService} from '../recipes/recipe.service';
 })
 export class HeaderComponent {
   constructor(private dataStorageService: DataStorageService,
-              private recipeService: RecipeService) {}
+              private recipeService: RecipeService,
+              private shoppingListService: ShoppingListService) {}
   onSaveData(){
     this.dataStorageService.storeRecipes().subscribe( (respone: Response) => {
 
@@ -20,9 +23,18 @@ export class HeaderComponent {
   onFetchData(){
     this.dataStorageService.getRecipes().subscribe(
       (respone: Recipe[]) =>{
-        this.recipeService.setRecipes(respone)
+        if(respone !== null) {
+          this.recipeService.setRecipes(this.dataStorageService.fixResponse(respone));
+        }
       }
     );
-    console.log("hi");
+    this.dataStorageService.getShoppingItems().subscribe(
+      (response: Ingredient[]) => {
+        if(response !== null){
+          this.shoppingListService.dataIngredients(response);
+        }
+    });
   }
+
+
 }

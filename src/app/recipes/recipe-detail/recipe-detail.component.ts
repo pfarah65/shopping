@@ -4,6 +4,7 @@ import {RecipeService} from '../recipe.service';
 import {ConfirmationService, Message} from 'primeng//api';
 import {MessageService} from 'primeng/api';
 import {ActivatedRoute, Params, Router} from '@angular/router';
+import {DataStorageService} from '../../shared/data-storage.service';
 
 @Component({
   selector: 'app-recipe-detail',
@@ -15,7 +16,8 @@ export class RecipeDetailComponent implements OnInit {
   id: number;
   constructor(private recipeService: RecipeService,private messageService: MessageService,
               private activatedRoute: ActivatedRoute, private router: Router,
-              private confirmService: ConfirmationService) { }
+              private confirmService: ConfirmationService,
+              private dataStorageService: DataStorageService) { }
 
   ngOnInit() {
     this.activatedRoute.params.subscribe((params: Params) => {
@@ -46,6 +48,7 @@ export class RecipeDetailComponent implements OnInit {
         this.recipeService.deleteRecipe(this.id);
         this.router.navigate(['../'],{relativeTo: this.activatedRoute});
         this.messageService.add({severity:'info', summary:'Confirmed', detail:`You have removed ${this.recipe.name} from the Recipe List`});
+        this.dataStorageService.storeRecipes().subscribe();
       },
       reject: () => {
         this.messageService.add({severity:'info', summary:'Canceled', detail: 'You have canceled'});

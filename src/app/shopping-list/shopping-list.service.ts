@@ -57,4 +57,9 @@ export class ShoppingListService {
     this.ingredients.splice(index,1);
     this.ingredientsChanged.next(this.ingredients.slice());
   }
+
+  dataIngredients(ingredients: Ingredient[]){
+    this.ingredients = ingredients;
+    this.ingredientsChanged.next(this.ingredients.slice());
+  }
 }

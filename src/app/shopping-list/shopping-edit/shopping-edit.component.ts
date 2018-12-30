@@ -4,6 +4,7 @@ import {ShoppingListService} from '../shopping-list.service';
 import {ConfirmationService, MessageService} from 'primeng/api';
 import {NgForm} from '@angular/forms';
 import {Subscription} from 'rxjs';
+import {DataStorageService} from '../../shared/data-storage.service';
 
 @Component({
   selector: 'app-shopping-edit',
@@ -14,8 +15,9 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
   @ViewChild('f') slForm:NgForm;
 
   constructor(private shoppingListService: ShoppingListService,
-              private messageService:MessageService,
-              private  confirmService: ConfirmationService) { }
+              private messageService: MessageService,
+              private  confirmService: ConfirmationService,
+              private dataStorageService: DataStorageService) { }
   editSubject: Subscription;
   editMode = false;
   editIndex: number;
@@ -46,6 +48,7 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
     }
     this.addItemMsg(value.name);
     this.editMode = false;
+    this.storeList();
     form.reset();
   }
   addItemMsg(item:string) {
@@ -62,6 +65,7 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
         this.shoppingListService.reset();
+        this.storeList();
         this.messageService.add({severity:'info', summary:'Confirmed', detail:'You have cleared Shopping List'});
         },
       reject: () => {
@@ -81,11 +85,17 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
         this.shoppingListService.delete(this.editIndex);
         this.messageService.add({severity:'info', summary:'Confirmed', detail:`You have removed ${this.editItem.name} from the Shopping List`});
         this.editMode = false;
+        this.storeList();
         form.reset();
       },
       reject: () => {
         this.messageService.add({severity:'info', summary:'Rejected', detail: 'You have canceled'});
       }
+
+    });
+  }
+  storeList(){
+    this.dataStorageService.storeShoppingItems().subscribe( (respone: Response) => {
 
     });
   }
