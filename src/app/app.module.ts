@@ -21,7 +21,7 @@ import {AppRoutingModule} from './app.routing.module';
 import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.component';
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {ConfirmDialogModule} from 'primeng/primeng';
+import {ConfirmDialogModule, PanelModule, ScrollPanel} from 'primeng/primeng';
 import {RecipeService} from './recipes/recipe.service';
 import {HttpClientModule} from '@angular/common/http';
 import {DataStorageService} from './shared/data-storage.service';
@@ -30,6 +30,7 @@ import { SigninComponent } from './auth/signin/signin.component';
 import {AuthService} from './auth/auth.service';
 import {AuthGuardService} from './auth/auth-guard.service';
 import { HomeComponent } from './home/home.component';
+import {ScrollPanelModule} from 'primeng/scrollpanel';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { HomeComponent } from './home/home.component';
     ReactiveFormsModule,
     ConfirmDialogModule,
     HttpClientModule,
-
+    PanelModule,
+    ScrollPanelModule
   ],
   providers: [
     ShoppingListService,

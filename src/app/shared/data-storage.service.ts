@@ -6,10 +6,10 @@ import {ShoppingListService} from '../shopping-list/shopping-list.service';
 import {AuthService} from '../auth/auth.service';
 @Injectable()
 export class DataStorageService {
-  recipeURL = 'https://ng-recipe-book-44be3.firebaseio.com/recipes.json';
+  recipeURL = 'https://ng-recipe-book-44be3.firebaseio.com/recipes';
   recipeURLItem = 'https://ng-recipe-book-44be3.firebaseio.com/recipes/'
   json = '.json'
-  shoppingListURL = 'https://ng-recipe-book-44be3.firebaseio.com/shoppingList.json';
+  shoppingListURL = 'https://ng-recipe-book-44be3.firebaseio.com/shoppingList';
 
   constructor(private  http: HttpClient, private recipeService: RecipeService,
               private shoppingListService: ShoppingListService,
@@ -21,28 +21,28 @@ export class DataStorageService {
     const token = this.authService.getToken();
     this.authService.getToken();
     console.log(this.recipeService.getRecipes());
-    return this.http.put(this.recipeURL + '?auth=' + token.toString(),
+    return this.http.put(this.recipeURL + this.authService.getUser() + this.json + '?auth=' + token.toString(),
       this.recipeService.getRecipes());
   }
 
   getRecipes() {
     const token = this.authService.getToken();
-
-    return this.http.get(this.recipeURL + '?auth=' + token.toString());
+    console.log(this.recipeURL + '?auth=' + token.toString());
+    return this.http.get(this.recipeURL + this.authService.getUser() + this.json + '?auth=' + token.toString());
   }
 
   
   storeShoppingItems(){
     const token = this.authService.getToken();
 
-    return this.http.put(this.shoppingListURL + '?auth=' + token.toString(),
+    return this.http.put(this.shoppingListURL + this.authService.getUser() + this.json + '?auth=' + token.toString(),
       this.shoppingListService.getIngredients());
   }
 
   getShoppingItems(){
     const token = this.authService.getToken();
 
-    return this.http.get(this.shoppingListURL + '?auth=' + token.toString());
+    return this.http.get(this.shoppingListURL + this.authService.getUser() + this.json + '?auth=' + token.toString());
   }
 
   fixResponse(recipes: Recipe[]) {

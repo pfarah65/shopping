@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {Subject} from 'rxjs';
 import {Recipe} from '../recipes/recipe.model';
 import {MessageService} from 'primeng/api';
+
 @Injectable()
 export class AuthService {
   loginError = new Subject<string>();
@@ -47,7 +48,7 @@ export class AuthService {
 
   }
 
-  getToken(){
+  getToken() {
     firebase.auth().currentUser.getIdToken()
       .then(
         (token: string) => this.token = token
@@ -59,7 +60,11 @@ export class AuthService {
     return this.token != null;
   }
 
-  logout(){
+  getUser() {
+    return firebase.auth().currentUser.uid.toString();
+  }
+
+  logout() {
     firebase.auth().signOut();
     this.messageService.add({severity:'success', summary: 'Logout', detail:'Logged out!'});
     this.token = null;
