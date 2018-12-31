@@ -54,9 +54,7 @@ export class HeaderComponent implements OnInit{
 
   onLogout(){
     this.authService.logout();
-    this.messageService.add({severity:'success', summary: 'Logout', detail:'Logged out!'});
-
-  }
+      }
 
 
 }

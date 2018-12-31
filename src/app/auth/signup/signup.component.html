@@ -1,17 +1,4 @@
 <div class="row">
-  <div class="col-xs-12 col-sm-3 col-md-4">
-    <div class="alert alert-warning" role="alert">
-
-      <h4 class="alert-heading">Passwords</h4>
-      <p>
-        Password must contain 1 number (0-9) <br>
-        Password must contain 1 uppercase letters<br>
-        Password must contain 1 lowercase letters<br>
-        Password must contain 1 non-alpha numeric number<br>
-        Password is 8-16 characters with no space<br>
-      </p>
-    </div>
-  </div>
 
   <div class="col-xs-12 col-sm-9 col-md-5 ">
     <form (ngSubmit)="onSignUp(f)" #f="ngForm">
@@ -35,7 +22,21 @@
         <strong>Error!</strong> Password's do not match!
       </div>
       <button class="btn btn-success" type="submit" [disabled]="!f.valid">Sign Up!</button>
+      <hr>
     </form>
+  </div>
+  <div class="col-xs-12 col-sm-3 col-md-4">
+    <div class="alert alert-warning" role="alert">
+
+      <h4 class="alert-heading">Passwords</h4>
+      <p>
+        Password must contain 1 number (0-9) <br>
+        Password must contain 1 uppercase letters<br>
+        Password must contain 1 lowercase letters<br>
+        Password must contain 1 non-alpha numeric number<br>
+        Password is 8-16 characters with no space<br>
+      </p>
+    </div>
   </div>
 </div>
 

@@ -4,6 +4,8 @@ import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
 import {RecipeService} from '../recipe.service';
 import {Recipe} from '../recipe.model';
 import {DataStorageService} from '../../shared/data-storage.service';
+import * as firebase from 'firebase';
+import {MessageService} from 'primeng/api';
 
 @Component({
   selector: 'app-recipe-edit',
@@ -18,7 +20,8 @@ export class RecipeEditComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute,
               private recipeService: RecipeService,
               private router: Router,
-              private dataStorageService: DataStorageService) { }
+              private dataStorageService: DataStorageService,
+              private messageService: MessageService) { }
 
   ngOnInit() {
     this.activatedRoute.params.subscribe((params: Params) => {
@@ -70,6 +73,8 @@ export class RecipeEditComponent implements OnInit {
     this.dataStorageService.storeRecipes().subscribe( (respone: Response) => {});
 
     this.onCancel();
+    this.messageService.add({severity:'success', summary: 'Sucess!', detail:`Added 
+                ${this.recipeForm.value.name} to Recipe List!`});
   }
 
   onAddIngredient(){

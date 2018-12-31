@@ -5,6 +5,7 @@ import {Recipe} from './recipe.model';
 import {Ingredient} from '../shared/ingredient.model';
 import {ShoppingListService} from '../shopping-list/shopping-list.service';
 import {AuthService} from '../auth/auth.service';
+import {el} from '@angular/platform-browser/testing/src/browser_util';
 
 
 @Component({
@@ -29,6 +30,8 @@ export class RecipesComponent implements OnInit, OnDestroy {
         (respone: Recipe[]) => {
           if (respone !== null) {
             this.recipeService.setRecipes(this.dataStorageService.fixResponse(respone));
+          }else{
+            this.recipeService.setRecipes([]);
           }
         }
       );
@@ -36,6 +39,8 @@ export class RecipesComponent implements OnInit, OnDestroy {
         (response: Ingredient[]) => {
           if(response !== null){
             this.shoppingListService.dataIngredients(response);
+          }else{
+            this.shoppingListService.dataIngredients([]);
           }
         });
     }

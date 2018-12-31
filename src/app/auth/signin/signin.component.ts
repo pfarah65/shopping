@@ -16,6 +16,7 @@ export class SigninComponent implements OnInit, OnDestroy {
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
+    console.log(firebase.auth().currentUser);
     if(firebase.auth().currentUser !== null){
       firebase.auth().currentUser.getIdToken().then( (token) =>{
          this.authService.hasToken(token);

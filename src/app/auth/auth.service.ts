@@ -3,11 +3,13 @@ import {Injectable} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Subject} from 'rxjs';
 import {Recipe} from '../recipes/recipe.model';
+import {MessageService} from 'primeng/api';
 @Injectable()
 export class AuthService {
   loginError = new Subject<string>();
   constructor(private activatedRoute: ActivatedRoute,
               private router: Router,
+              private messageService: MessageService
               ) {}
   
   token: string;
@@ -25,7 +27,11 @@ export class AuthService {
           this.router.navigate(['/recipes']);
           firebase.auth().currentUser.getIdToken()
             .then(
-              (token: string) => this.token = token
+              (token: string) => {
+                this.token = token;
+                this.messageService.add({severity:'success', summary: 'Welcome!', detail:`Hello 
+                ${firebase.auth().currentUser.email}`});
+              }
             );
         }
       )
@@ -36,6 +42,9 @@ export class AuthService {
   hasToken(token: string){
     this.token = token;
     this.router.navigate(['/recipes']);
+    this.messageService.add({severity:'success', summary: 'Welcome!', detail:`Hello 
+                ${firebase.auth().currentUser.email}`});
+
   }
 
   getToken(){
@@ -52,6 +61,7 @@ export class AuthService {
 
   logout(){
     firebase.auth().signOut();
+    this.messageService.add({severity:'success', summary: 'Logout', detail:'Logged out!'});
     this.token = null;
   }
 }
