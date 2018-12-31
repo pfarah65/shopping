@@ -9,25 +9,25 @@
       </span>
 
 </a>
-<p-dialog header={{recipe.name}} [(visible)]="display" [modal]="true" [responsive]="true" [style]="{width: '350px'}" [minY]="70"
-          [maximizable]="true" [baseZIndex]="10000">
-  <!--<div class="row">-->
-    <p-header>
+<!--<p-dialog header={{recipe.name}} [(visible)]="display" [modal]="true" [responsive]="true" [style]="{width: '350px'}" [minY]="70"-->
+          <!--[maximizable]="true" [baseZIndex]="10000">-->
+  <!--&lt;!&ndash;<div class="row">&ndash;&gt;-->
+    <!--<p-header>-->
 
-    </p-header>
-    <div class="col-xs-12">
-      <h3 style="position: "></h3>
-    </div>
-    <div class="col-xs-12">
-      <p>{{recipe.description}}</p>
-      <ul class="list-group">
-        <li class="list-group-item" *ngFor="let ing of recipe.ingredients">
-          {{ing.name}}
-        </li>
-      </ul>
-    </div>
+    <!--</p-header>-->
+    <!--<div class="col-xs-12">-->
+      <!--<h3 style="position: "></h3>-->
     <!--</div>-->
-  <p-footer>
-    <button class="btn btn-default" (click)="closeDialog()">Close</button>
-  </p-footer>
-</p-dialog>
+    <!--<div class="col-xs-12">-->
+      <!--<p>{{recipe.description}}</p>-->
+      <!--<ul class="list-group">-->
+        <!--<li class="list-group-item" *ngFor="let ing of recipe.ingredients">-->
+          <!--{{ing.name}}-->
+        <!--</li>-->
+      <!--</ul>-->
+    <!--</div>-->
+    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+  <!--<p-footer>-->
+    <!--<button class="btn btn-default" (click)="closeDialog()">Close</button>-->
+  <!--</p-footer>-->
+<!--</p-dialog>-->
