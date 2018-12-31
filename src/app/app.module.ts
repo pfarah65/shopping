@@ -29,6 +29,7 @@ import { SignupComponent } from './auth/signup/signup.component';
 import { SigninComponent } from './auth/signin/signin.component';
 import {AuthService} from './auth/auth.service';
 import {AuthGuardService} from './auth/auth-guard.service';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import {AuthGuardService} from './auth/auth-guard.service';
     RecipeEditComponent,
     SignupComponent,
     SigninComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
