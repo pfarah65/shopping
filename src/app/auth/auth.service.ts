@@ -17,7 +17,7 @@ export class AuthService {
       .then(
         res => {
 
-          this.router.navigate(['/']);
+          this.router.navigate(['/recipes']);
           firebase.auth().currentUser.getIdToken()
             .then(
               (token: string) => this.token = token

@@ -15,13 +15,13 @@ const appRoutes: Routes = [
   {path: 'home', component: HomeComponent},
   {path: 'recipes', component: RecipesComponent, children:
     [
-      {path: '', component: RecipeStartComponent},
+      {path: '', component: RecipeStartComponent, canActivate: [AuthGuardService]},
       {path: 'new', component: RecipeEditComponent, canActivate: [AuthGuardService]},
-      {path: ':id', component: RecipeDetailComponent},
+      {path: ':id', component: RecipeDetailComponent, canActivate: [AuthGuardService]},
       {path: ':id/edit', component: RecipeEditComponent, canActivate: [AuthGuardService]}
-      ]
+      ], canActivate: [AuthGuardService],
     },
-  {path: 'shopping-list', component: ShoppingListComponent},
+  {path: 'shopping-list', component: ShoppingListComponent, canActivate: [AuthGuardService]},
   {path: 'signup', component: SignupComponent},
   {path: 'signin', component: SigninComponent}
 ];
