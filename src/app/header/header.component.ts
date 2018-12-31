@@ -5,6 +5,7 @@ import {RecipeService} from '../recipes/recipe.service';
 import {ShoppingListService} from '../shopping-list/shopping-list.service';
 import {Ingredient} from '../shared/ingredient.model';
 import {AuthService} from '../auth/auth.service';
+import {MessageService} from 'primeng/api';
 
 @Component({
   selector: 'app-header',
@@ -16,7 +17,8 @@ export class HeaderComponent implements OnInit{
   constructor(private dataStorageService: DataStorageService,
               private recipeService: RecipeService,
               private shoppingListService: ShoppingListService,
-              private authService: AuthService) {}
+              private authService: AuthService,
+              private messageService: MessageService) {}
   onSaveData(){
     this.dataStorageService.storeRecipes().subscribe( (respone: Response) => {
 
@@ -52,6 +54,8 @@ export class HeaderComponent implements OnInit{
 
   onLogout(){
     this.authService.logout();
+    this.messageService.add({severity:'success', summary: 'Logout', detail:'Logged out!'});
+
   }
 
 

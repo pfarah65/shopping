@@ -9,7 +9,8 @@ export class AuthService {
   
   token: string;
   signupUser(email: string, password: string){
-    firebase.auth().createUserWithEmailAndPassword(email, password).catch( error => console.log(error));
+    firebase.auth().createUserWithEmailAndPassword(email, password).catch( error => console.log(error))
+      .then(resp => this.signInUser(email,password));
   }
 
   signInUser(email: string, password: string){
