@@ -7,12 +7,14 @@ import {Recipe} from '../recipes/recipe.model';
 export class AuthService {
   loginError = new Subject<string>();
   constructor(private activatedRoute: ActivatedRoute,
-              private router: Router) {}
+              private router: Router,
+              ) {}
   
   token: string;
   signupUser(email: string, password: string){
     firebase.auth().createUserWithEmailAndPassword(email, password).catch( error => console.log(error))
       .then(resp => this.signInUser(email,password));
+
   }
 
   signInUser(email: string, password: string){
@@ -29,6 +31,11 @@ export class AuthService {
       )
       .catch(err => this.loginError.next(err.message));
 
+  }
+
+  hasToken(token: string){
+    this.token = token;
+    this.router.navigate(['/recipes']);
   }
 
   getToken(){

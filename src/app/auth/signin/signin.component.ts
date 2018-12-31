@@ -2,6 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {AuthService} from '../auth.service';
 import {Subscription} from 'rxjs';
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'app-signin',
@@ -15,6 +16,11 @@ export class SigninComponent implements OnInit, OnDestroy {
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
+    if(firebase.auth().currentUser !== null){
+      firebase.auth().currentUser.getIdToken().then( (token) =>{
+         this.authService.hasToken(token);
+      });
+    }
     this.loginSubscription = this.authService.loginError.subscribe(
       (msg) =>{
       this.invalid = true;
