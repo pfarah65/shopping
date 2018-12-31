@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {RecipeService} from './recipe.service';
 import {DataStorageService} from '../shared/data-storage.service';
 import {Recipe} from './recipe.model';
@@ -6,12 +6,13 @@ import {Ingredient} from '../shared/ingredient.model';
 import {ShoppingListService} from '../shopping-list/shopping-list.service';
 import {AuthService} from '../auth/auth.service';
 
+
 @Component({
   selector: 'app-recipes',
   templateUrl: './recipes.component.html',
   styleUrls: ['./recipes.component.css']
 })
-export class RecipesComponent implements OnInit {
+export class RecipesComponent implements OnInit, OnDestroy {
   constructor(private dataStorageService: DataStorageService,
               private recipeService: RecipeService,
               private shoppingListService: ShoppingListService,
@@ -19,6 +20,10 @@ export class RecipesComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.getData();
+    setInterval(() => {this.getData(); }, 10000);
+    }
+  getData() {
     if (this.authService.token != null) {
       this.dataStorageService.getRecipes().subscribe(
         (respone: Recipe[]) => {
@@ -34,8 +39,10 @@ export class RecipesComponent implements OnInit {
           }
         });
     }
-    }
-
+  }
+  ngOnDestroy(){
+    clearInterval();
+  }
 
 
 }

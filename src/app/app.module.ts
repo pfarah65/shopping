@@ -59,7 +59,8 @@ import { HomeComponent } from './home/home.component';
     FormsModule,
     ReactiveFormsModule,
     ConfirmDialogModule,
-    HttpClientModule
+    HttpClientModule,
+
   ],
   providers: [
     ShoppingListService,
