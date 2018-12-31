@@ -29,19 +29,21 @@ export class HeaderComponent implements OnInit{
     }
   }
   onFetchData(){
-    this.dataStorageService.getRecipes().subscribe(
-      (respone: Recipe[]) =>{
-        if(respone !== null) {
-          this.recipeService.setRecipes(this.dataStorageService.fixResponse(respone));
+    if(this.authService.isAuthenticated()) {
+      this.dataStorageService.getRecipes().subscribe(
+        (respone: Recipe[]) => {
+          if (respone !== null) {
+            this.recipeService.setRecipes(this.dataStorageService.fixResponse(respone));
+          }
         }
-      }
-    );
-    this.dataStorageService.getShoppingItems().subscribe(
-      (response: Ingredient[]) => {
-        if(response !== null){
-          this.shoppingListService.dataIngredients(response);
-        }
-    });
+      );
+      this.dataStorageService.getShoppingItems().subscribe(
+        (response: Ingredient[]) => {
+          if (response !== null) {
+            this.shoppingListService.dataIngredients(response);
+          }
+        });
+    }
   }
   update(){
     console.log('updating');
