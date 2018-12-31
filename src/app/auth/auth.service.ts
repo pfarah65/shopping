@@ -1,9 +1,11 @@
 import * as firebase from 'firebase';
 import {Injectable} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
+import {Subject} from 'rxjs';
+import {Recipe} from '../recipes/recipe.model';
 @Injectable()
 export class AuthService {
-  
+  loginError = new Subject<string>();
   constructor(private activatedRoute: ActivatedRoute,
               private router: Router) {}
   
@@ -25,7 +27,7 @@ export class AuthService {
             );
         }
       )
-      .catch(err => console.log(err));
+      .catch(err => this.loginError.next(err.message));
 
   }
 
