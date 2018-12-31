@@ -25,6 +25,15 @@
                required
                pattern="^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\w\d\s:])([^\s]){8,16}$">
       </div>
+      <div class="form-group">
+        <label for="passwordAgain">Re-type password</label>
+        <input type="password" id="passwordAgain" name="passwordAgain" ngModel class="form-control"
+               required
+               pattern="^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\w\d\s:])([^\s]){8,16}$">
+      </div>
+      <div class="alert alert-danger" *ngIf="invalidMatch">
+        <strong>Error!</strong> Password's do not match!
+      </div>
       <button class="btn btn-success" type="submit" [disabled]="!f.valid">Sign Up!</button>
     </form>
   </div>
