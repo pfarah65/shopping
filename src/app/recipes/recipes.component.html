@@ -3,7 +3,8 @@
     <router-outlet></router-outlet>
   </div>
   <div class="col-md-5">
-    <app-recipe-list></app-recipe-list>
+    <app-recipe-list [shared]="false"></app-recipe-list>
+    <app-recipe-list [shared]="true"></app-recipe-list>
   </div>
 </div>
 
