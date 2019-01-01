@@ -8,7 +8,7 @@
   <div class="col-xs-12">
       <p-panel header="My Recipes" [toggleable]="true" [style]="{'margin-bottom':'20px'}">
         <p-scrollPanel [style]="{width: '100%', height: '200px'}">
-        <app-recipe-item *ngFor="let recipeEl of recipes;let i = index" [recipe]="recipeEl" [index]="i"></app-recipe-item>
+        <app-recipe-item [shared]="shared" *ngFor="let recipeEl of recipes;let i = index" [recipe]="recipeEl" [index]="i"></app-recipe-item>
         </p-scrollPanel>
       </p-panel>
   </div>
