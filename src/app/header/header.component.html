@@ -1,9 +1,21 @@
 <nav class ="navbar navbar-default navbar-fixed-top">
   <div class="container-fluid">
     <div class="navbar-header">
+      <button appDropdown type="button" class="navbar-toggle collapsed pull-right" data-toggle="collapse" data-target="#navbarCollapse">
+        <a class="dropdown-toggle" role="button">Goto... <span class="caret"></span> </a>
+        <ul class="dropdown-menu">
+          <li *ngIf="authService.isAuthenticated()" routerLinkActive="active"><a routerLink="/recipes" (click)="update()">Recipe</a></li>
+          <li *ngIf="authService.isAuthenticated()" routerLinkActive="active"><a routerLink="/shopping-list" (click)="update()">Shopping List</a></li>
+          <ng-template [ngIf]="!authService.isAuthenticated()">
+            <li><a routerLink="/signup">Sign up!</a></li>
+            <li><a routerLink="/signin">Sign in</a></li>
+          </ng-template>
+          <li *ngIf="authService.isAuthenticated()"><a style="cursor: pointer" (click)="onLogout()" routerLink="/home">Logout</a></li>
+        </ul>
+      </button>
       <a routerLink="" class="navbar-brand">Recipe Tracker</a>
     </div>
-    <div class="collapse navbar-collapse">
+    <div class="collapse navbar-collapse" id="navbarCollapse">
       <ul class="nav navbar-nav">
         <li *ngIf="authService.isAuthenticated()" routerLinkActive="active"><a routerLink="/recipes" (click)="update()">Recipe</a></li>
         <li *ngIf="authService.isAuthenticated()" routerLinkActive="active"><a routerLink="/shopping-list" (click)="update()">Shopping List</a></li>
@@ -23,6 +35,7 @@
         </li>
       </ul>
     </div>
+
   </div>
 </nav>
 
