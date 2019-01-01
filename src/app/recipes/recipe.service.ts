@@ -3,6 +3,8 @@ import {Injectable} from '@angular/core';
 import {Ingredient} from '../shared/ingredient.model';
 import {ShoppingListService} from '../shopping-list/shopping-list.service';
 import {Subject} from 'rxjs';
+import * as firebase from 'firebase';
+import {MessageService} from 'primeng/api';
 
 @Injectable()
 export class RecipeService {
@@ -15,7 +17,7 @@ export class RecipeService {
 
 
 
-  constructor(private shoppingListService: ShoppingListService) {}
+  constructor(private shoppingListService: ShoppingListService, private messageService: MessageService) {}
   
   getRecipes(){
     return this.recipes.slice();
@@ -35,9 +37,19 @@ export class RecipeService {
   }
 
   addRecipe(recipe: Recipe){
-    this.recipes.push(recipe);
-    this.recipeChanged.next(this.recipes.slice());
-    console.log(this.recipes);
+    let flag = false;
+    this.recipes.forEach((recip) => {
+      if(recip.name == recipe.name){
+        flag = true;
+      }
+    });
+    if(!flag){
+      this.recipes.push(recipe);
+      this.recipeChanged.next(this.recipes.slice());
+      this.messageService.add({severity:'success', summary: 'Added!', detail:`${recipe.name} is now in your Recipes`});
+    } else{
+      this.messageService.add({severity:'error', summary: 'Failed!', detail:`${recipe.name} already in your Recipes`});
+    }
   }
 
   updateRecipe(index: number, newRecp: Recipe){
@@ -53,7 +65,6 @@ export class RecipeService {
   setRecipes(recipes: Recipe[]){
     this.recipes = recipes;
     this.recipeChanged.next(recipes.slice());
-    console.log(this.recipes);
   }
   setSharedRecipes(recipes: Recipe[]){
     this.sharedRecipes = recipes;

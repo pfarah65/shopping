@@ -18,7 +18,6 @@ export class HomeComponent implements OnInit, DoCheck {
   ngDoCheck(){
     if(firebase.auth().currentUser !== null){
       firebase.auth().currentUser.getIdToken().then( (token) =>{
-        console.log('peter');
         this.authService.hasToken(token);
 
       });

@@ -22,7 +22,7 @@ export class RecipesComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.getData();
-    setInterval(() => {this.getData(); }, 10000);
+    // setInterval(() => {this.getData(); }, 10000);
     }
   getData() {
     if (this.authService.token != null) {
@@ -41,6 +41,12 @@ export class RecipesComponent implements OnInit, OnDestroy {
             this.shoppingListService.dataIngredients(response);
           }else{
             this.shoppingListService.dataIngredients([]);
+          }
+        });
+      this.dataStorageService.getSharedRecipes().subscribe(
+        (response: Recipe[]) => {
+          if (response !== null) {
+            this.recipeService.setSharedRecipes(response);
           }
         });
     }

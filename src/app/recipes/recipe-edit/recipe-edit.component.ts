@@ -73,7 +73,7 @@ export class RecipeEditComponent implements OnInit {
     this.dataStorageService.storeRecipes().subscribe( (respone: Response) => {});
 
     this.onCancel();
-    this.messageService.add({severity:'success', summary: 'Sucess!', detail:`Added 
+    this.messageService.add({severity:'success', summary: 'Saved', detail:`Saved 
                 ${this.recipeForm.value.name} to Recipe List!`});
   }
 

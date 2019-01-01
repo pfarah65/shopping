@@ -18,8 +18,6 @@ export class SignupComponent implements OnInit {
     const password = form.value.password;
     const passwordAgain = form.value.passwordAgain;
     if(password === passwordAgain){
-
-      console.log(password);
       this.authService.signupUser(email, password);
     }else{
       this.invalidMatch = true;

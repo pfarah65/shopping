@@ -43,8 +43,6 @@ export class HeaderComponent implements OnInit{
         (response: Recipe[]) => {
           if (response !== null) {
             this.recipeService.setSharedRecipes(response);
-            console.log("hi");
-            console.log(response);
           }
         });
       this.dataStorageService.getShoppingItems().subscribe(

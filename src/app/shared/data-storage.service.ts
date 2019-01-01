@@ -17,6 +17,7 @@ export class DataStorageService {
 
   }
 
+
   storeRecipes(){
     const token = this.authService.getToken();
     this.authService.getToken();
@@ -27,7 +28,7 @@ export class DataStorageService {
 
   getRecipes() {
     const token = this.authService.getToken();
-    console.log(this.recipeURL + '?auth=' + token.toString());
+
     return this.http.get(this.recipeURL + this.authService.getUser() + this.json + '?auth=' + token.toString());
   }
 

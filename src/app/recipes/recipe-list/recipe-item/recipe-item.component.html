@@ -1,7 +1,7 @@
 <a *ngIf="!shared" class="list-group-item clearfix" style="cursor: pointer;" [routerLink]="[index]" routerLinkActive="active">
   <div class="pull-left">
     <h4 class="list-group-item-heading">{{recipe.name}}</h4>
-    <p class="list-group-item-text">{{recipe.description}}</p>
+    <p class="list-group-item-text">{{ (recipe.description.length>6)? (recipe.description | slice:0:15)+'..':(recipe.description) }}</p>
    <!--<button class="btn btn-default" (click)="showDialog()">View</button>-->
   </div>
   <span class="pull-right">
@@ -13,12 +13,12 @@
 <a *ngIf="shared" class="list-group-item clearfix">
   <div class="pull-left">
     <h4 class="list-group-item-heading">{{recipe.name}}</h4>
-    <p class="list-group-item-text">{{recipe.description}}</p>
+    <p class="list-group-item-text"> {{ (recipe.description.length>6)? (recipe.description | slice:0:15)+'..':(recipe.description) }}</p>
     <!--<button class="btn btn-default" (click)="showDialog()">View</button>-->
   </div>
   <span class="pull-right">
-  <button class="btn btn-primary pi pi-plus" *ngIf="shared"></button></span>
-  <span class="pull-left">
+  <button class="btn btn-success pi pi-plus" *ngIf="shared" (click)="addSharedRecipe()"></button></span>
+  <span class="pull-left" style="margin-left: 20px">
         <img [src]="recipe.imagePath" alt="{{ recipe.name}}" class="img-responsive" style="max-height: 50px;">
       </span>
 

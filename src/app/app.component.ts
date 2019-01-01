@@ -12,7 +12,6 @@ export class AppComponent implements OnInit{
       apiKey: "AIzaSyDU9hGDNN_XtMWX8eWsCeirP89e4Im70d8",
       authDomain: "ng-recipe-book-44be3.firebaseapp.com"
     });
-    console.log("hi init");
   }
   onNavigate(feature: string){
     this.loadedFeature = feature;

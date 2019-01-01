@@ -24,7 +24,6 @@ export class RecipeListComponent implements OnInit, OnDestroy {
 
       this.recipeShareSub = this.recipeService.recipeShareChanged.subscribe((recipes: Recipe[]) => {
         this.recipes = recipes;
-        console.log(this.recipes);
       });
 
     } else {
@@ -32,7 +31,6 @@ export class RecipeListComponent implements OnInit, OnDestroy {
       this.recipes = this.recipeService.getRecipes();
       this.recipeSub = this.recipeService.recipeChanged.subscribe( (recipes: Recipe[]) => {
         this.recipes = recipes;
-        console.log(this.recipes);
         });
     }
 
