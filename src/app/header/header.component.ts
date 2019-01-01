@@ -39,6 +39,14 @@ export class HeaderComponent implements OnInit{
           }
         }
       );
+      this.dataStorageService.getSharedRecipes().subscribe(
+        (response: Recipe[]) => {
+          if (response !== null) {
+            this.recipeService.setSharedRecipes(response);
+            console.log("hi");
+            console.log(response);
+          }
+        });
       this.dataStorageService.getShoppingItems().subscribe(
         (response: Ingredient[]) => {
           if (response !== null) {

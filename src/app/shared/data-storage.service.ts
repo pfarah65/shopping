@@ -31,6 +31,13 @@ export class DataStorageService {
     return this.http.get(this.recipeURL + this.authService.getUser() + this.json + '?auth=' + token.toString());
   }
 
+  getSharedRecipes(){
+    const token = this.authService.getToken();
+    return this.http.get(this.recipeURL + this.json + '?auth=' + token.toString());
+
+
+  }
+
   
   storeShoppingItems(){
     const token = this.authService.getToken();
