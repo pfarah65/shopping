@@ -597,10 +597,10 @@ Apache-2.0
 firebase
 Apache-2.0
 
-@angular/common
+@angular/animations
 MIT
 
-@angular/animations
+@angular/common
 MIT
 
 @angular/platform-browser
