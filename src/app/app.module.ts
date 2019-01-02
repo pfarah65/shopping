@@ -32,7 +32,7 @@ import {AuthGuardService} from './auth/auth-guard.service';
 import { HomeComponent } from './home/home.component';
 import {ScrollPanelModule} from 'primeng/scrollpanel';
 import {ShortenPipe} from './shorten.pipe';
-
+import {TooltipModule} from 'primeng/tooltip';
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,7 +49,8 @@ import {ShortenPipe} from './shorten.pipe';
     SignupComponent,
     SigninComponent,
     HomeComponent,
-    ShortenPipe
+    ShortenPipe,
+
   ],
   imports: [
     BrowserModule,
@@ -64,7 +65,8 @@ import {ShortenPipe} from './shorten.pipe';
     ConfirmDialogModule,
     HttpClientModule,
     PanelModule,
-    ScrollPanelModule
+    ScrollPanelModule,
+    TooltipModule
   ],
   providers: [
     ShoppingListService,
