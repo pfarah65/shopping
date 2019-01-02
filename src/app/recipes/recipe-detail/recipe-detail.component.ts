@@ -60,4 +60,7 @@ export class RecipeDetailComponent implements OnInit {
 
     });
   }
+  onShareRecipe(){
+    console.log("Sharing");
+  }
 }
