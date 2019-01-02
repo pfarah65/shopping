@@ -9,6 +9,7 @@ import {DataStorageService} from '../../../shared/data-storage.service';
   styleUrls: ['./recipe-item.component.css']
 })
 export class RecipeItemComponent implements OnInit {
+  trail = 15;
   @Input() recipe: Recipe;
   @Input()index: number;
   @Input() shared: boolean;

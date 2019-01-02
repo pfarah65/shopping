@@ -31,6 +31,7 @@ import {AuthService} from './auth/auth.service';
 import {AuthGuardService} from './auth/auth-guard.service';
 import { HomeComponent } from './home/home.component';
 import {ScrollPanelModule} from 'primeng/scrollpanel';
+import {ShortenPipe} from './shorten.pipe';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import {ScrollPanelModule} from 'primeng/scrollpanel';
     SignupComponent,
     SigninComponent,
     HomeComponent,
+    ShortenPipe
   ],
   imports: [
     BrowserModule,

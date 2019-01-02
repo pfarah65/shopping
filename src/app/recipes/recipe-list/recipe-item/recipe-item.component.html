@@ -1,7 +1,7 @@
 <a *ngIf="!shared" class="list-group-item clearfix" style="cursor: pointer;" [routerLink]="[index]" routerLinkActive="active">
   <div class="pull-left">
-    <h4 class="list-group-item-heading">{{(recipe.name.length>6)? (recipe.name | slice:0:15)+'..':(recipe.name) }}</h4>
-    <p class="list-group-item-text">{{ (recipe.description.length>6)? (recipe.description | slice:0:15)+'..':(recipe.description) }}</p>
+    <h4 class="list-group-item-heading">{{recipe.name | shorten:trail }}</h4>
+    <p class="list-group-item-text">{{ recipe.description | shorten:trail+5 }}</p>
    <!--<button class="btn btn-default" (click)="showDialog()">View</button>-->
   </div>
   <span class="pull-right">
@@ -12,8 +12,8 @@
 
 <a *ngIf="shared" class="list-group-item clearfix">
   <div class="pull-left">
-    <h4 class="list-group-item-heading">{{(recipe.name.length>6)? (recipe.name | slice:0:15)+'..':(recipe.name) }}</h4>
-    <p class="list-group-item-text"> {{ (recipe.description.length>6)? (recipe.description | slice:0:15)+'..':(recipe.description) }}</p>
+    <h4 class="list-group-item-heading">{{recipe.name | shorten: trail}}</h4>
+    <p class="list-group-item-text"> {{ recipe.description | shorten: trail+5}}</p>
     <!--<button class="btn btn-default" (click)="showDialog()">View</button>-->
   </div>
   <span class="pull-right">
