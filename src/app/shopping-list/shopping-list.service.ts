@@ -18,7 +18,23 @@ export class ShoppingListService {
     this.ingredients.forEach((ingr) => {
       ingredients.forEach((ingr2) => {
         if (ingr.name === ingr2.name ) {
-          ingr.amount += ingr2.amount;
+          let flag = true;
+          if (ingr.amount.indexOf('/')>-1 || ingr2.amount.indexOf('/')>-1){
+            let num1;
+            let num2;
+            if(ingr.amount.indexOf('/')>-1){
+              let split = ingr.amount.split('/');
+              num1 = parseFloat(split[0]) / parseFloat(split[1]);
+            }else{ num1 = parseFloat(ingr.amount); }
+            if(ingr2.amount.indexOf('/')>-1) {
+              let split2 = ingr2.amount.split('/');
+              num2 = parseFloat(split2[0]) / parseFloat(split2[1]);
+            }else {num2 = parseFloat("0.5"); }
+            ingr.amount = this.convertNumber(num1 + num2);
+          } else {
+            ingr.amount = this.convertNumber(parseFloat(ingr2.amount) + parseFloat(ingr.amount));
+
+          }
           ingredients.splice(ingredients.indexOf(ingr2), 1);
         }
       });
@@ -69,10 +85,11 @@ export class ShoppingListService {
           if(ingredient.amount.indexOf('/')>-1) {
             let split2 = ingredient.amount.split('/');
             num2 = parseFloat(split2[0]) / parseFloat(split2[1]);
-          }else {num2 = parseFloat("0.5"); }
-          ingr.amount = (num1 + num2).toString();
+          }else {num2 = parseFloat(ingredient.amount); }
+          ingr.amount = this.convertNumber(num1 + num2);
         } else {
-          ingr.amount = parseFloat(ingredient.amount) + parseFloat(ingr.amount).toString();
+          ingr.amount = this.convertNumber(parseFloat(ingredient.amount) + parseFloat(ingr.amount));
+
           break;
         }
       }
@@ -81,5 +98,9 @@ export class ShoppingListService {
       this.ingredients.push(ingredient);
     }
     this.ingredientsChanged.next(this.ingredients.slice());
+  }
+  convertNumber(num: number) {
+    return Number(num.toFixed(1)
+    ).toString();
   }
 }
