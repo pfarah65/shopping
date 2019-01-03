@@ -10,7 +10,8 @@ import {MessageService} from 'primeng/api';
 export class RecipeService {
   recipeChanged = new Subject<Recipe[]>();
   recipeShareChanged = new Subject<Recipe[]>();
-  private ingredients: Ingredient[] = [new Ingredient('Apples', 5),new Ingredient('Dog', 5)];
+
+  private ingredients: Ingredient[] = [new Ingredient('Apples', '5'),new Ingredient('Dog', '5')];
   private recipes: Recipe[] = [];
   private sharedRecipes: Recipe[] = [];
 

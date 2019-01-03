@@ -6,25 +6,13 @@ export class ShoppingListService {
   @Output() ingredientsChanged = new Subject<Ingredient[]>();
   startedEditing = new Subject<number>()
   private ingredients: Ingredient[] = [
-    new Ingredient('Apples', 5)
+    new Ingredient('Apples', '5')
   ];
   getIngredients() {
     return this.ingredients.slice();
   }
-  addIngredient(ingredient: Ingredient) {
-    let flag = false;
-    for( const ingr of this.ingredients) {
-      if (ingr.name === ingredient.name) {
-        flag = true;
-        ingr.amount = +ingredient.amount + +ingr.amount;
-        break;
-      }
-    }
-    if (!flag) {
-      this.ingredients.push(ingredient);
-    }
-    this.ingredientsChanged.next(this.ingredients.slice());
-  }
+
+
 
   addIngredients(ingredients: Ingredient[]) {
     this.ingredients.forEach((ingr) => {
@@ -60,6 +48,38 @@ export class ShoppingListService {
 
   dataIngredients(ingredients: Ingredient[]){
     this.ingredients = ingredients;
+    this.ingredientsChanged.next(this.ingredients.slice());
+  }
+
+
+
+
+  addIngredient(ingredient: Ingredient) {
+    let flag = false;
+    for( const ingr of this.ingredients) {
+      if (ingr.name === ingredient.name) {
+        flag = true;
+        if (ingr.amount.indexOf('/')>-1 || ingredient.amount.indexOf('/')>-1){
+          let num1;
+          let num2;
+          if(ingr.amount.indexOf('/')>-1){
+            let split = ingr.amount.split('/');
+            num1 = parseFloat(split[0]) / parseFloat(split[1]);
+          }else{ num1 = parseFloat(ingr.amount); }
+          if(ingredient.amount.indexOf('/')>-1) {
+            let split2 = ingredient.amount.split('/');
+            num2 = parseFloat(split2[0]) / parseFloat(split2[1]);
+          }else {num2 = parseFloat("0.5"); }
+          ingr.amount = (num1 + num2).toString();
+        } else {
+          ingr.amount = parseFloat(ingredient.amount) + parseFloat(ingr.amount).toString();
+          break;
+        }
+      }
+    }
+    if(!flag) {
+      this.ingredients.push(ingredient);
+    }
     this.ingredientsChanged.next(this.ingredients.slice());
   }
 }
