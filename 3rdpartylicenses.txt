@@ -603,6 +603,9 @@ MIT
 @angular/common
 MIT
 
+ngx-device-detector
+MIT
+
 @angular/platform-browser
 MIT
 
