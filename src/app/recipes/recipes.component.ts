@@ -5,7 +5,7 @@ import {Recipe} from './recipe.model';
 import {Ingredient} from '../shared/ingredient.model';
 import {ShoppingListService} from '../shopping-list/shopping-list.service';
 import {AuthService} from '../auth/auth.service';
-import {el} from '@angular/platform-browser/testing/src/browser_util';
+
 
 
 @Component({
@@ -14,6 +14,7 @@ import {el} from '@angular/platform-browser/testing/src/browser_util';
   styleUrls: ['./recipes.component.css']
 })
 export class RecipesComponent implements OnInit, OnDestroy {
+
   constructor(private dataStorageService: DataStorageService,
               private recipeService: RecipeService,
               private shoppingListService: ShoppingListService,
@@ -22,7 +23,7 @@ export class RecipesComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.getData();
-    // setInterval(() => {this.getData(); }, 10000);
+    setInterval(() => {this.getData(); }, 10000);
     }
   getData() {
     if (this.authService.token != null) {

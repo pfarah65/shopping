@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnInit} from '@angular/core';
 import {Recipe} from '../recipe.model';
 import {RecipeService} from '../recipe.service';
 import {ConfirmationService, Message} from 'primeng//api';
@@ -22,6 +22,7 @@ export class RecipeDetailComponent implements OnInit {
               private shoppingListService: ShoppingListService) { }
 
   ngOnInit() {
+
     this.activatedRoute.params.subscribe((params: Params) => {
       this.id = +params['id'];
       this.recipe = this.recipeService.getRecipe(this.id);
@@ -63,4 +64,5 @@ export class RecipeDetailComponent implements OnInit {
   onShareRecipe(){
     console.log("Sharing");
   }
+
 }

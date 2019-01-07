@@ -33,6 +33,8 @@ import { HomeComponent } from './home/home.component';
 import {ScrollPanelModule} from 'primeng/scrollpanel';
 import {ShortenPipe} from './shorten.pipe';
 import {TooltipModule} from 'primeng/tooltip';
+import {DeviceDetectorModule} from 'ngx-device-detector';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -66,7 +68,8 @@ import {TooltipModule} from 'primeng/tooltip';
     HttpClientModule,
     PanelModule,
     ScrollPanelModule,
-    TooltipModule
+    TooltipModule,
+    DeviceDetectorModule.forRoot()
   ],
   providers: [
     ShoppingListService,
